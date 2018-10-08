@@ -205,6 +205,7 @@ favoriteLibrarian.assistCustomer("Andrii");
 //#endregion
 
 //#region Task 05. Creating and Using Classes
+
 console.log("\n Task 05");
 
 // 1. Создайте класс ReferenceItem, который содержит:
@@ -227,10 +228,14 @@ class ReferenceItem {
   // }
 
   printItem(): void {
-    console.log(`${this.title} was published in ${this.year} department ${ReferenceItem.department}`);
+    console.log(
+      `${this.title} was published in ${this.year} department ${
+        ReferenceItem.department
+      }`
+    );
   }
 
-  constructor(public title: string, private year: number) {}
+  constructor(public title: string, protected year: number) {}
 
   private _publisher: string;
 
@@ -265,6 +270,34 @@ console.log(`\n Publisher=${ref.publisher}`);
 
 // 5. Создайте статичное строчное свойство department и проинициализируйте его каким-либо значением по умолчанию.
 // Внесите изменения в метод printItem() – добавьте вывод в консоль этого статического свойства.
+// --> див. вище
+
+//#endregion
+
+//#region Task 06. Extending Classes
+
+console.log("\n Task 06");
+
+// 1. Создайте класс Encyclopedia как наследника класса ReferenceItem. Добавьте одно дополнительное числовое публичное
+// свойство edition. Используйте параметры конструктора.
+class Encyclopedia extends ReferenceItem {
+  constructor(title: string, year: number, public edition: number) {
+    super(title, year);
+  }
+
+  printItem(): void {
+    super.printItem();
+    console.log(`«Edition: ${this.edition} (year)»`);
+  }
+}
+
+// 2. Объявите переменную refBook и создайте объект Encyclopedia. Вызовите метод printItem();
+const refBook: ReferenceItem = new Encyclopedia("Encyclopedia", 1993, 2008);
+refBook.printItem();
+
+// 3. Переопределите метод printItem(). Пусть он делает то, что делал и дополнительно выводит строчку
+// в консоль «Edition: edition (year)». Вы получите ошибку, что свойство year недоступно.
+// Чтобы оно было доступно измените модификатор доступа в классе ReferenceItem на protected.
 // --> див. вище
 
 //#endregion
