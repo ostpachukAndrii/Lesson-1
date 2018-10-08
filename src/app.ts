@@ -180,26 +180,91 @@ interface Librarian {
   assistCustomer(custName: string): void;
 }
 
-// 2. Создайте класс UniversityLibrarian, который реализует интерфейс Librarian и реализуйте все необходимые свойства. 
+// 2. Создайте класс UniversityLibrarian, который реализует интерфейс Librarian и реализуйте все необходимые свойства.
 // Метод assistCustomer должен выводить в консоль строчку `${this.name} is assisting ${custName}`.
 
 class UniversityLibrarian implements Librarian {
-    name: string;
-    email: string;
-    department: string;
+  name: string;
+  email: string;
+  department: string;
 
-    assistCustomer(custName: string): void {
-        console.log(`${this.name} is assisting ${custName}`);
-    }
+  assistCustomer(custName: string): void {
+    console.log(`${this.name} is assisting ${custName}`);
+  }
 }
 
-// 3. Объявите переменную favoriteLibrarian используя интерфейс Librarian и проинициализируйте ее с помощью объекта, 
-// созданного классом UniversityLibrarian(). Никаких ошибок при этом не должно возникать. Проинициализируйте 
+// 3. Объявите переменную favoriteLibrarian используя интерфейс Librarian и проинициализируйте ее с помощью объекта,
+// созданного классом UniversityLibrarian(). Никаких ошибок при этом не должно возникать. Проинициализируйте
 // свойство name и вызовите метод assistCustomer().
 
 const favoriteLibrarian: Librarian = new UniversityLibrarian();
-favoriteLibrarian.name="My favorite librarian"
-console.log("\n Task 4.3")
+favoriteLibrarian.name = "My favorite librarian";
+console.log("\n Task 4.3");
 favoriteLibrarian.assistCustomer("Andrii");
+
+//#endregion
+
+//#region Task 05. Creating and Using Classes
+console.log("\n Task 05");
+
+// 1. Создайте класс ReferenceItem, который содержит:
+//  a.	Строчное свойство title
+//  b.	Числовое свойство year
+//  c.	Конструктор c двумя параметрами: строчный параметр newTitle, числовой параметр newYear,
+//  который в консоль выводит строчку 'Creating a new ReferenceItem...' и инициализирует поля.
+//  d.	Метод printItem() без параметров, который ничего не возвращает.
+//  Этот метод должен использовать template string literal и выводить строчку «title was published in year» в консоль.
+
+class ReferenceItem {
+  // title: string
+  // year: number
+
+  // constructor(newTitle: string, newYear: number)
+  // {
+  //     console.log("Creating a new ReferenceItem...");
+  //     this.title=newTitle;
+  //     this.year=newYear;
+  // }
+
+  printItem(): void {
+    console.log(`${this.title} was published in ${this.year} department ${ReferenceItem.department}`);
+  }
+
+  constructor(public title: string, private year: number) {}
+
+  private _publisher: string;
+
+  get publisher(): string {
+    return this._publisher.toUpperCase();
+  }
+
+  set publisher(newPublisher: string) {
+    this._publisher = newPublisher;
+  }
+
+  static department: string = "default value";
+}
+
+//2. Объявите переменную ref и проинициализируйте ее объектом ReferenceItem.
+//Передайте значения параметров в конструктор. Вызовите метод printItem().
+const ref: ReferenceItem = new ReferenceItem("Book", 1994);
+ref.printItem();
+
+//3. Закомментируйте конструктор, свойства title и year и реализуйте создание свойств
+//через параметры конструктора (title- public, year - private).
+// --> див. вище
+
+// 4. Создайте приватное свойство _publisher: string.
+//    a. Добавьте геттер publisher, который преобразовывает свойство _publisher в верхний регистр и возвращает его.
+//    b. Добавьте сеттер publisher, который принимает строчный параметр newPublisher и устанавливает значение свойства
+//    _publisher в значение этого параметра.
+//    c. Проинициализируйте свойство ref.publisher каким-либо сточным значением и выведите его в консоль.
+//    Результат должен быть в верхнем регистре.
+ref.publisher = "Kiev";
+console.log(`\n Publisher=${ref.publisher}`);
+
+// 5. Создайте статичное строчное свойство department и проинициализируйте его каким-либо значением по умолчанию.
+// Внесите изменения в метод printItem() – добавьте вывод в консоль этого статического свойства.
+// --> див. вище
 
 //#endregion
