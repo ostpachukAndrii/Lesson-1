@@ -130,42 +130,76 @@ interface Book {
 // используя объявленный выше интерфейс Book. Удалите временно id у книжки и увидите, что появится ошибка.
 //--> Див. вище
 
-// 3. Создайте функцию printBook(), которая на вход принимает книгу и выводит в консоль фразу 
+// 3. Создайте функцию printBook(), которая на вход принимает книгу и выводит в консоль фразу
 // book.title + by + book.author. Для типа параметра используйте интерфейс Book.
 
 function printBook(book: Book): void {
-    console.log(`${book.title} by ${book.author}`);
+  console.log(`${book.title} by ${book.author}`);
 }
 
 // 4. Объявите переменную myBook и присвойте ей следующий объект
 const myBook: Book = {
-    id: 5,
-    title: 'Colors, Backgrounds, and Gradients',
-    author: 'Eric A. Meyer',
-    available: true,
-    category: Category.CSS,
-    pages: 200,
-    markDamaged: (reason)=> console.log(`Damaged: ${reason}`)
-} 
+  id: 5,
+  title: "Colors, Backgrounds, and Gradients",
+  author: "Eric A. Meyer",
+  available: true,
+  category: Category.CSS,
+  pages: 200,
+  markDamaged: reason => console.log(`Damaged: ${reason}`)
+};
 // 5. Вызовите функцию printBook() и передайте ей myBook. Никаких ошибок при этом не должно появляться.
 printBook(myBook);
 
-// 6. Добавьте в интерфейс Book свойство pages: number. 
+// 6. Добавьте в интерфейс Book свойство pages: number.
 //Вы получите ошибку в функции getAllBooks(). Чтобы ошибка не возникала сделайте свойство не обязательным.
 //--> Див. вище
 
-// 7. Укажите явно для переменной myBook тип Book. 
+// 7. Укажите явно для переменной myBook тип Book.
 //Вы снова получите ошибку. Удалите свойства year, copies. Добавьте свойство pages: 200.
 //--> Див. вище
 
-// 8. Добавьте в интерфейс Book необязательное свойство markDamaged, которое является методом. 
-//Метод принимает на вход строчный параметр reason и ничего не возвращает. 
-//Добавьте этот метод в объект myBook. Метод должен выводить строчку `Damaged: ${reason}`, 
+// 8. Добавьте в интерфейс Book необязательное свойство markDamaged, которое является методом.
+//Метод принимает на вход строчный параметр reason и ничего не возвращает.
+//Добавьте этот метод в объект myBook. Метод должен выводить строчку `Damaged: ${reason}`,
 //используя стрелочную функцию. Вызовите этот метод и передайте строку ‘missing back cover’
-console.log('\nTask 3.8');
-myBook.markDamaged('missing back cover');
-
-
+console.log("\nTask 3.8");
+myBook.markDamaged("missing back cover");
 
 //#endregion
 
+//#region Task 04. Interfaces for Class Types
+
+// 1. Объявите интерфейс Librarian, который содержит следующие свойства:
+// • Строчные свойства name, email, department
+// • Функция assistCustomer, которая принимает строчный параметр custName и ничего не возвращает.
+interface Librarian {
+  name: string;
+  email: string;
+  department: string;
+
+  assistCustomer(custName: string): void;
+}
+
+// 2. Создайте класс UniversityLibrarian, который реализует интерфейс Librarian и реализуйте все необходимые свойства. 
+// Метод assistCustomer должен выводить в консоль строчку `${this.name} is assisting ${custName}`.
+
+class UniversityLibrarian implements Librarian {
+    name: string;
+    email: string;
+    department: string;
+
+    assistCustomer(custName: string): void {
+        console.log(`${this.name} is assisting ${custName}`);
+    }
+}
+
+// 3. Объявите переменную favoriteLibrarian используя интерфейс Librarian и проинициализируйте ее с помощью объекта, 
+// созданного классом UniversityLibrarian(). Никаких ошибок при этом не должно возникать. Проинициализируйте 
+// свойство name и вызовите метод assistCustomer().
+
+const favoriteLibrarian: Librarian = new UniversityLibrarian();
+favoriteLibrarian.name="My favorite librarian"
+console.log("\n Task 4.3")
+favoriteLibrarian.assistCustomer("Andrii");
+
+//#endregion
