@@ -2,23 +2,35 @@
 
 //  1.	Реализуйте функцию getAllBooks(), которая возвращает коллекцию книжек. Объявите эту коллекцию внутри функции,
 // используя let.
-function getAllBooks(): Array<any> {
+function getAllBooks(): Array<Book> {
   const books: Array<any> = [
     {
+      id: 1,
       title: "Refactoring JavaScript",
       author: "Evan Burchard",
-      available: true
+      available: true,
+      category: Category.JavaScript
     },
     {
+      id: 2,
       title: "JavaScript Testing",
       author: "Liang Yuxian Eugene",
-      available: false
+      available: false,
+      category: Category.JavaScript
     },
-    { title: "CSS Secrets", author: "Lea Verou", available: true },
     {
+      id: 3,
+      title: "CSS Secrets",
+      author: "Lea Verou",
+      available: true,
+      category: Category.CSS
+    },
+    {
+      id: 4,
       title: "Mastering JavaScript Object-Oriented Programming",
       author: "Andrea Chiarelli",
-      available: true
+      available: true,
+      category: Category.JavaScript
     }
   ];
 
@@ -64,3 +76,96 @@ const booksInfo: string = logFirstAvailable(getAllBooks());
 console.log(booksInfo);
 
 //#endregion
+
+//#region Task 02. Enum
+
+// 1. Объявите enum Category для хранения следующих категорий книг:
+const enum Category {
+  JavaScript,
+  CSS,
+  HTML,
+  TypeScript,
+  Angular
+}
+
+// 2. Добавьте категорию к объектам в функции getAllBooks()
+// --> див. вище
+
+// 3. Реализуйте функцию getBookTitlesByCategory(), которая на вход будет получать категорию и возвращать массив
+// наименований книг, которые принадлежат указанной категории. Используйте тип Array<string> и объявленный enum.
+function getBookTitlesByCategory(category: Category): Array<string> {
+  const books: Array<any> = getAllBooks();
+  return books.filter(b => b.category === category).map(book => {
+    if (book.category === category) {
+      return book.title;
+    }
+  });
+}
+
+// 4. Реализуйте функцию logBookTitles(), которая принимает массив строк и выводит его в консоль. Используйте типы:
+// string[] и  void.
+function logBookTitles(stringArray: Array<string>): void {
+  console.log(stringArray.join(", "));
+}
+
+logBookTitles(getBookTitlesByCategory(Category.JavaScript));
+
+//#endregion
+
+//#region Task 03. Defining an Interface
+
+//1. Объявите интерфейс Book, который включает следующие поля
+
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  available: boolean;
+  category: Category;
+  pages?: number;
+  markDamaged(reason: string): void;
+}
+
+// 2. Внесите изменения в функцию getAllBooks(), укажите тип возвращаемого значения,
+// используя объявленный выше интерфейс Book. Удалите временно id у книжки и увидите, что появится ошибка.
+//--> Див. вище
+
+// 3. Создайте функцию printBook(), которая на вход принимает книгу и выводит в консоль фразу 
+// book.title + by + book.author. Для типа параметра используйте интерфейс Book.
+
+function printBook(book: Book): void {
+    console.log(`${book.title} by ${book.author}`);
+}
+
+// 4. Объявите переменную myBook и присвойте ей следующий объект
+const myBook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    pages: 200,
+    markDamaged: (reason)=> console.log(`Damaged: ${reason}`)
+} 
+// 5. Вызовите функцию printBook() и передайте ей myBook. Никаких ошибок при этом не должно появляться.
+printBook(myBook);
+
+// 6. Добавьте в интерфейс Book свойство pages: number. 
+//Вы получите ошибку в функции getAllBooks(). Чтобы ошибка не возникала сделайте свойство не обязательным.
+//--> Див. вище
+
+// 7. Укажите явно для переменной myBook тип Book. 
+//Вы снова получите ошибку. Удалите свойства year, copies. Добавьте свойство pages: 200.
+//--> Див. вище
+
+// 8. Добавьте в интерфейс Book необязательное свойство markDamaged, которое является методом. 
+//Метод принимает на вход строчный параметр reason и ничего не возвращает. 
+//Добавьте этот метод в объект myBook. Метод должен выводить строчку `Damaged: ${reason}`, 
+//используя стрелочную функцию. Вызовите этот метод и передайте строку ‘missing back cover’
+console.log('\nTask 3.8');
+myBook.markDamaged('missing back cover');
+
+
+
+//#endregion
+
