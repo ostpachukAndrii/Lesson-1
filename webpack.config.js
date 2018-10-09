@@ -42,7 +42,7 @@ module.exports = {
   // plugins
   plugins: [
     // minification plugin
-    new UglifyJsPlugin(),
+    //new UglifyJsPlugin(),
 
     // delete dist folder
     new CleanWebpackPlugin(['dist']),
