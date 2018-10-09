@@ -1,5 +1,7 @@
+import { Category } from "./enums";
+import { Book, Librarian } from "./Intefaces";
+import { UniversityLibrarian, ReferenceItem } from "./classes";
 //#region Task 01. Basic Types
-
 //  1.	Реализуйте функцию getAllBooks(), которая возвращает коллекцию книжек. Объявите эту коллекцию внутри функции,
 // используя let.
 function getAllBooks(): Array<Book> {
@@ -79,15 +81,6 @@ console.log(booksInfo);
 
 //#region Task 02. Enum
 
-// 1. Объявите enum Category для хранения следующих категорий книг:
-const enum Category {
-  JavaScript,
-  CSS,
-  HTML,
-  TypeScript,
-  Angular
-}
-
 // 2. Добавьте категорию к объектам в функции getAllBooks()
 // --> див. вище
 
@@ -113,18 +106,6 @@ logBookTitles(getBookTitlesByCategory(Category.JavaScript));
 //#endregion
 
 //#region Task 03. Defining an Interface
-
-//1. Объявите интерфейс Book, который включает следующие поля
-
-interface Book {
-  id: number;
-  title: string;
-  author: string;
-  available: boolean;
-  category: Category;
-  pages?: number;
-  markDamaged(reason: string): void;
-}
 
 // 2. Внесите изменения в функцию getAllBooks(), укажите тип возвращаемого значения,
 // используя объявленный выше интерфейс Book. Удалите временно id у книжки и увидите, что появится ошибка.
@@ -169,30 +150,6 @@ myBook.markDamaged("missing back cover");
 
 //#region Task 04. Interfaces for Class Types
 
-// 1. Объявите интерфейс Librarian, который содержит следующие свойства:
-// • Строчные свойства name, email, department
-// • Функция assistCustomer, которая принимает строчный параметр custName и ничего не возвращает.
-interface Librarian {
-  name: string;
-  email: string;
-  department: string;
-
-  assistCustomer(custName: string): void;
-}
-
-// 2. Создайте класс UniversityLibrarian, который реализует интерфейс Librarian и реализуйте все необходимые свойства.
-// Метод assistCustomer должен выводить в консоль строчку `${this.name} is assisting ${custName}`.
-
-class UniversityLibrarian implements Librarian {
-  name: string;
-  email: string;
-  department: string;
-
-  assistCustomer(custName: string): void {
-    console.log(`${this.name} is assisting ${custName}`);
-  }
-}
-
 // 3. Объявите переменную favoriteLibrarian используя интерфейс Librarian и проинициализируйте ее с помощью объекта,
 // созданного классом UniversityLibrarian(). Никаких ошибок при этом не должно возникать. Проинициализируйте
 // свойство name и вызовите метод assistCustomer().
@@ -207,48 +164,6 @@ favoriteLibrarian.assistCustomer("Andrii");
 //#region Task 05. Creating and Using Classes
 
 console.log("\n Task 05");
-
-// 1. Создайте класс ReferenceItem, который содержит:
-//  a.	Строчное свойство title
-//  b.	Числовое свойство year
-//  c.	Конструктор c двумя параметрами: строчный параметр newTitle, числовой параметр newYear,
-//  который в консоль выводит строчку 'Creating a new ReferenceItem...' и инициализирует поля.
-//  d.	Метод printItem() без параметров, который ничего не возвращает.
-//  Этот метод должен использовать template string literal и выводить строчку «title was published in year» в консоль.
-
-class ReferenceItem {
-  // title: string
-  // year: number
-
-  // constructor(newTitle: string, newYear: number)
-  // {
-  //     console.log("Creating a new ReferenceItem...");
-  //     this.title=newTitle;
-  //     this.year=newYear;
-  // }
-
-  printItem(): void {
-    console.log(
-      `${this.title} was published in ${this.year} department ${
-        ReferenceItem.department
-      }`
-    );
-  }
-
-  constructor(public title: string, protected year: number) {}
-
-  private _publisher: string;
-
-  get publisher(): string {
-    return this._publisher.toUpperCase();
-  }
-
-  set publisher(newPublisher: string) {
-    this._publisher = newPublisher;
-  }
-
-  static department: string = "default value";
-}
 
 //2. Объявите переменную ref и проинициализируйте ее объектом ReferenceItem.
 //Передайте значения параметров в конструктор. Вызовите метод printItem().
@@ -301,3 +216,5 @@ refBook.printItem();
 // --> див. вище
 
 //#endregion
+
+//#region Task 07. Export and Import
