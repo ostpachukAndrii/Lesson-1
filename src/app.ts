@@ -1,6 +1,6 @@
 import { Category } from "./enums";
 import { Book, Librarian } from "./Intefaces";
-import { UniversityLibrarian, ReferenceItem } from "./classes";
+import { UniversityLibrarian, ReferenceItem, Encyclopedia } from "./classes/index";
 //#region Task 01. Basic Types
 //  1.	Реализуйте функцию getAllBooks(), которая возвращает коллекцию книжек. Объявите эту коллекцию внутри функции,
 // используя let.
@@ -193,19 +193,6 @@ console.log(`\n Publisher=${ref.publisher}`);
 
 console.log("\n Task 06");
 
-// 1. Создайте класс Encyclopedia как наследника класса ReferenceItem. Добавьте одно дополнительное числовое публичное
-// свойство edition. Используйте параметры конструктора.
-class Encyclopedia extends ReferenceItem {
-  constructor(title: string, year: number, public edition: number) {
-    super(title, year);
-  }
-
-  printItem(): void {
-    super.printItem();
-    console.log(`«Edition: ${this.edition} (year)»`);
-  }
-}
-
 // 2. Объявите переменную refBook и создайте объект Encyclopedia. Вызовите метод printItem();
 const refBook: ReferenceItem = new Encyclopedia("Encyclopedia", 1993, 2008);
 refBook.printItem();
@@ -218,3 +205,5 @@ refBook.printItem();
 //#endregion
 
 //#region Task 07. Export and Import
+
+//#region Task 08. Re-Export

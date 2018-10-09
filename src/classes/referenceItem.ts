@@ -1,18 +1,3 @@
-import * as Interfaces from "./Intefaces";
-
-// Task 4
-// 2. Создайте класс UniversityLibrarian, который реализует интерфейс Librarian и реализуйте все необходимые свойства.
-// Метод assistCustomer должен выводить в консоль строчку `${this.name} is assisting ${custName}`.
-class UniversityLibrarian implements Interfaces.Librarian {
-  name: string;
-  email: string;
-  department: string;
-
-  assistCustomer(custName: string): void {
-    console.log(`${this.name} is assisting ${custName}`);
-  }
-}
-
 // Task 5
 // 1. Создайте класс ReferenceItem, который содержит:
 //  a.	Строчное свойство title
@@ -56,4 +41,4 @@ class ReferenceItem {
   static department: string = "default value";
 }
 
-export { UniversityLibrarian, ReferenceItem };
+export { ReferenceItem };
